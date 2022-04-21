@@ -36,6 +36,7 @@ public class Program {
             if (currPlayer == "Player1") {
                 playerHit = PlayerTurn(player1.Board, player1.Score, player1Guesses);
                 playerNum++;
+                playerScore = player1.Score;
                 (player2.Board, playerScore) = BoardModel.CheckHit(player2.Board, playerHit, playerScore);
                 player1.Score = playerScore;
                 if (BoardModel.CheckWin(player1.Name, player1.Score)) {
@@ -44,6 +45,7 @@ public class Program {
             } else {
                 playerHit = PlayerTurn(player2.Board, player2.Score, player2Guesses);
                 playerNum--;
+                playerScore = player2.Score;
                 (player1.Board, playerScore) = BoardModel.CheckHit(player1.Board, playerHit, playerScore);
                 player2.Score = playerScore;
                 if (BoardModel.CheckWin(player2.Name, player2.Score)) {
