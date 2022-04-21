@@ -38,15 +38,17 @@ public class Program {
                 playerNum++;
                 (player2.Board, playerScore) = BoardModel.CheckHit(player2.Board, playerHit, playerScore);
                 player1.Score = playerScore;
-                if (BoardModel.CheckWin(player1.Name, player1.Score))
+                if (BoardModel.CheckWin(player1.Name, player1.Score)) {
                     break;
+                }   
             } else {
                 playerHit = PlayerTurn(player2.Board, player2.Score, player2Guesses);
                 playerNum--;
                 (player1.Board, playerScore) = BoardModel.CheckHit(player1.Board, playerHit, playerScore);
                 player2.Score = playerScore;
-                if (BoardModel.CheckWin(player2.Name, player2.Score))
+                if (BoardModel.CheckWin(player2.Name, player2.Score)) {
                     break;
+                }    
             }
         }
     }
