@@ -23,21 +23,25 @@ public class Program {
         players.Add(player1);
         players.Add(player2);
 
+        InitPlayers(players);
+
+        while (player1.Score < 5 && player2.Score < 5) {
+
+            if (currPlayer == "Player1") {
+                PlayerTurn(player1.Board, player2.Board, player1.Score, player1.Name, player1Guesses);
+            } else {
+                PlayerTurn(player2.Board, player1.Board, player2.Score, player2.Name, player2Guesses);
+            }
+        }
+    }
+
+    private static void InitPlayers(List<PlayerModel> players) {
         foreach (var player in players) {
             ConsoleMessages.Welcome(0);
             Console.WriteLine(player.Name + " enter your ship positions: ");
             Console.WriteLine();
             BoardModel.BoardPlacement(player.Board);
             Console.Clear();
-        }
-
-        while (player1.Score < 5 && player2.Score < 5) {
-
-            if (currPlayer == "Player1") {
-                HandlePlayer(player2.Board, player1.Score, player1.Name);
-            } else {
-                HandlePlayer(player1.Board, player2.Score, player2.Name);
-            }
         }
     }
 
@@ -49,7 +53,7 @@ public class Program {
         return playerHit;
     }
 
-    private static string PlayerTurn(List<string> board, int playerScoreModel, List<string> guesses) {
+    private static void PlayerTurn(List<string> board, List<string> opponentBoard, int playerScoreModel, string currPlayerName, List<string> guesses) {
         Thread.Sleep(TimeSpan.FromSeconds(0.5));
         Console.Clear();
         ConsoleMessages.Welcome(0);
@@ -61,22 +65,24 @@ public class Program {
         Console.WriteLine($"Guesses so far ({guesses.Count}): {string.Join(", ", guesses)}");
         playerHit = GetPlayerHit(playerScoreModel, playerNum);
         guesses.Add(playerHit);
-        return playerHit;
+        HandlePlayer(opponentBoard, currPlayerName);
     }
 
-    private static void HandlePlayer(List<string> opponentBoard, int playerScoreModel, string currPlayerName) {
+    private static void HandlePlayer(List<string> opponentBoard, string currPlayerName) {
         if (currPlayer == "Player1") {
             playerNum++;
-            playerScore = playerScoreModel;
-            (opponentBoard, playerScore) = BoardModel.CheckHit(opponentBoard, playerHit, playerScore);
-            playerScoreModel = playerScore;
-            BoardModel.CheckWin(currPlayerName, playerScoreModel);
+            currPlayer = $"Player{playerNum}";
+            playerScore = player1.Score;
+            (_, playerScore) = BoardModel.CheckHit(opponentBoard, playerHit, playerScore);
+            player1.Score = playerScore;
+            BoardModel.CheckWin(currPlayerName, player1.Score);
         } else {
             playerNum--;
-            playerScore = playerScoreModel;
-            (opponentBoard, playerScore) = BoardModel.CheckHit(opponentBoard, playerHit, playerScore);
-            playerScoreModel = playerScore;
-            BoardModel.CheckWin(currPlayerName, playerScoreModel);
+            currPlayer = $"Player{playerNum}";
+            playerScore = player2.Score;
+            (_, playerScore) = BoardModel.CheckHit(opponentBoard, playerHit, playerScore);
+            player2.Score = playerScore;
+            BoardModel.CheckWin(currPlayerName, player2.Score);
         }
     }
 }
