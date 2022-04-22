@@ -21,6 +21,12 @@ namespace ConsoleMessageLibrary {
   \__/\  /  \___  >____/\___  >____/|__|_|  /\___  >   |____| \____/   |______  /(____  /__|  |__| |____/\___  >_______  /|___|  /__|   __/ 
        \/       \/          \/            \/     \/                           \/      \/                     \/        \/      \/   |__|    
 ");
+            Console.WriteLine("Created by Ofir Picciotto");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+
             Thread.Sleep(TimeSpan.FromSeconds(sleep));
         }
     }
