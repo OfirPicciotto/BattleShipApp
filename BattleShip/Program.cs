@@ -10,6 +10,7 @@ using System.Threading;
 
 public class Program {
     private static int playerNum = 1;
+    private static string currPlayer = $"Player{playerNum}";
     private static int playerScore = 0;
     private static string playerHit;
     private static List<string> player1Guesses = new List<string>();
@@ -31,26 +32,11 @@ public class Program {
         }
 
         while (player1.Score < 5 && player2.Score < 5) {
-            string currPlayer = $"Player{playerNum}";
 
             if (currPlayer == "Player1") {
-                playerHit = PlayerTurn(player1.Board, player1.Score, player1Guesses);
-                playerNum++;
-                playerScore = player1.Score;
-                (player2.Board, playerScore) = BoardModel.CheckHit(player2.Board, playerHit, playerScore);
-                player1.Score = playerScore;
-                if (BoardModel.CheckWin(player1.Name, player1.Score)) {
-                    break;
-                }   
+                HandlePlayer(player2.Board, player1.Score, player1.Name);
             } else {
-                playerHit = PlayerTurn(player2.Board, player2.Score, player2Guesses);
-                playerNum--;
-                playerScore = player2.Score;
-                (player1.Board, playerScore) = BoardModel.CheckHit(player1.Board, playerHit, playerScore);
-                player2.Score = playerScore;
-                if (BoardModel.CheckWin(player2.Name, player2.Score)) {
-                    break;
-                }    
+                HandlePlayer(player1.Board, player2.Score, player2.Name);
             }
         }
     }
@@ -77,4 +63,21 @@ public class Program {
         guesses.Add(playerHit);
         return playerHit;
     }
+
+    private static void HandlePlayer(List<string> opponentBoard, int playerScoreModel, string currPlayerName) {
+        if (currPlayer == "Player1") {
+            playerNum++;
+            playerScore = playerScoreModel;
+            (opponentBoard, playerScore) = BoardModel.CheckHit(opponentBoard, playerHit, playerScore);
+            playerScoreModel = playerScore;
+            BoardModel.CheckWin(currPlayerName, playerScoreModel);
+        } else {
+            playerNum--;
+            playerScore = playerScoreModel;
+            (opponentBoard, playerScore) = BoardModel.CheckHit(opponentBoard, playerHit, playerScore);
+            playerScoreModel = playerScore;
+            BoardModel.CheckWin(currPlayerName, playerScoreModel);
+        }
+    }
+}
 }
