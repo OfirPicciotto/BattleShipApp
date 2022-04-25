@@ -20,8 +20,6 @@ public class Program {
     private static List<PlayerModel> players = new List<PlayerModel>();
 
     public static void Main(string[] args) {
-        players.Add(player1);
-        players.Add(player2);
 
         InitPlayers(players);
 
@@ -36,6 +34,8 @@ public class Program {
     }
 
     private static void InitPlayers(List<PlayerModel> players) {
+        players.Add(player1);
+        players.Add(player2);
         foreach (var player in players) {
             ConsoleMessages.Welcome(0);
             Console.WriteLine(player.Name + " enter your ship positions: ");
