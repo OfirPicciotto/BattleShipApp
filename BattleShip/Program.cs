@@ -53,12 +53,12 @@ public class Program {
         }
     }
 
-    private static string GetPlayerHit(int playerScore, int playerNum) {
+    private static void GetPlayerHit(int playerScore, int playerNum, List<string> guesses) {
         playerHit = ConsoleMessages.GetString($"Player{playerNum}, Please enter a cell to fire on (Hits: {playerScore}/5): ");
         if (playerHit == "") {
             playerHit = ConsoleMessages.GetString($"Player{playerNum}, Please enter a cell to fire on (Hits: {playerScore}/5): ");
         }
-        return playerHit;
+        guesses.Add(playerHit);
     }
 
     private static void PlayerTurn(List<string> board, List<string> opponentBoard, int playerScoreModel, string currPlayerName, List<string> guesses) {
@@ -71,8 +71,7 @@ public class Program {
         BoardModel.PrintBoard(board);
         Console.WriteLine();
         Console.WriteLine($"Guesses so far ({guesses.Count}): {string.Join(", ", guesses)}");
-        playerHit = GetPlayerHit(playerScoreModel, playerNum);
-        guesses.Add(playerHit);
+        GetPlayerHit(playerScoreModel, playerNum, guesses);
         HandlePlayer(opponentBoard, currPlayerName);
     }
 
