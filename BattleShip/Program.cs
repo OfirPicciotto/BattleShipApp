@@ -55,6 +55,7 @@ public class Program {
 
     private static void GetPlayerHit(int playerScore, int playerNum, List<string> guesses) {
         playerHit = ConsoleMessages.GetString($"Player{playerNum}, Please enter a cell to fire on (Hits: {playerScore}/5): ");
+        playerHit = string.Concat(playerHit[0].ToString().ToUpper(), playerHit.AsSpan(1));
         if (playerHit == "") {
             playerHit = ConsoleMessages.GetString($"Player{playerNum}, Please enter a cell to fire on (Hits: {playerScore}/5): ");
         }

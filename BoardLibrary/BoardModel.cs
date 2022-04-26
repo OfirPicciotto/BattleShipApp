@@ -25,6 +25,7 @@ namespace BoardLibrary {
 
         private static string GetCell(int shipNum) {
             string cell = ConsoleMessages.GetString($"Enter cell to place ship #{shipNum} (Values from A1-E5): ");
+            cell =  string.Concat(cell[0].ToString().ToUpper(), cell.AsSpan(1));
             while (cell == "" || cell == null) {
                 cell = ConsoleMessages.GetString($"Enter cell to place ship #{shipNum} (Values from A1-E5): ");
             }
