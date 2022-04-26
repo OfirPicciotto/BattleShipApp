@@ -70,6 +70,8 @@ namespace BoardLibrary {
                 board = BoardMark(board, cell, " OO ");
                 return (board, playerScore);
             } else {
+                Console.WriteLine("You entered an invalid cell and missed your turn!!!");
+                Thread.Sleep(TimeSpan.FromSeconds(1));
                 return (board, playerScore);
             }
         }
