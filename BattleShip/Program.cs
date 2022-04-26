@@ -21,6 +21,7 @@ public class Program {
 
     public static void Main(string[] args) {
 
+        //CreatePlayer(2);
         InitPlayers(players);
 
         while (player1.Score < 5 && player2.Score < 5) {
@@ -32,6 +33,13 @@ public class Program {
             }
         }
     }
+
+    //public static void CreatePlayer(int numPlayers) {
+    //    for (int i = 1; i <= numPlayers; i++) {
+    //        PlayerModel player = new PlayerModel($"Player{i}");
+    //        players.Add(player);
+    //    }
+    //}
 
     private static void InitPlayers(List<PlayerModel> players) {
         players.Add(player1);
