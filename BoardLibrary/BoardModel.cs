@@ -101,6 +101,7 @@ namespace BoardLibrary {
                 ConsoleMessages.Welcome(0);
                 Console.WriteLine();
                 Console.WriteLine($"Congratulations {playerName}!!! You Won The Game!!!");
+                Thread.Sleep(TimeSpan.FromSeconds(1.5));
                 return true;
             }
             return false;
