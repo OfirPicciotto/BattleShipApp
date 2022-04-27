@@ -4,6 +4,7 @@ using PlayerLibrary;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Threading;
 
 
@@ -13,6 +14,8 @@ public class Program {
     private static string currPlayer = $"Player{playerNum}";
     private static int playerScore = 0;
     private static string playerHit;
+    private static string pattern = @"[A-E]+[1-5]";
+    private static Regex rg = new Regex(pattern);
     private static List<string> player1Guesses = new List<string>();
     private static List<string> player2Guesses = new List<string>();
     private static PlayerModel player1 = new PlayerModel("Player1");
@@ -56,8 +59,11 @@ public class Program {
     private static void GetPlayerHit(int playerScore, int playerNum, List<string> guesses) {
         playerHit = ConsoleMessages.GetString($"Player{playerNum}, Please enter a cell to fire on (Hits: {playerScore}/5): ");
         playerHit = string.Concat(playerHit[0].ToString().ToUpper(), playerHit.AsSpan(1));
-        if (playerHit == "") {
+        var match = rg.Match(playerHit);
+        while (playerHit == "" || !match.Success) {
             playerHit = ConsoleMessages.GetString($"Player{playerNum}, Please enter a cell to fire on (Hits: {playerScore}/5): ");
+            playerHit = string.Concat(playerHit[0].ToString().ToUpper(), playerHit.AsSpan(1));
+            match = rg.Match(playerHit);
         }
         guesses.Add(playerHit);
     }
