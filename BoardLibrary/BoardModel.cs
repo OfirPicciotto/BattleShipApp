@@ -48,10 +48,10 @@ namespace BoardLibrary {
             foreach (var cell in board) {
                 idx++;
                 if (idx == LineCharacterLimit) {
-                    Console.WriteLine(" {0} ", cell);
+                    Console.WriteLine($" {cell}");
                     idx = 0;
                 } else {
-                    Console.Write(" {0} ", cell);
+                    Console.Write($" {cell} ");
                 }
             }
         }
@@ -62,13 +62,13 @@ namespace BoardLibrary {
             if (idxHit != -1) {
                 Console.WriteLine();
                 Console.WriteLine("HIT!!!");
-                board = BoardMark(board, cell, " XX ");
+                board = BoardMark(board, cell, "XX");
                 playerScore++;
                 return (board, playerScore);
             } else if (idx != -1) {
                 Console.WriteLine();
                 Console.WriteLine("MISSED");
-                board = BoardMark(board, cell, " OO ");
+                board = BoardMark(board, cell, "OO");
                 return (board, playerScore);
             } else {
                 Console.WriteLine("You entered an invalid cell and missed your turn!!!");
